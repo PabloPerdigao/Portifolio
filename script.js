@@ -1,4 +1,4 @@
-// --- 1. EFEITO MATRIX RAIN (Fundo da Hero) ---
+//EFEITO MATRIX RAIN
 const canvas = document.getElementById("matrixCanvas");
 const ctx = canvas.getContext("2d");
 
@@ -19,11 +19,10 @@ for (let x = 0; x < columns; x++) {
 }
 
 function drawMatrix() {
-  // Fundo semi-transparente para criar o rastro
   ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-  ctx.fillStyle = "#20c997"; // Cor Teal
+  ctx.fillStyle = "#20c997"; 
   ctx.font = fontSize + "px monospace";
 
   for (let i = 0; i < drops.length; i++) {
@@ -38,9 +37,9 @@ function drawMatrix() {
     drops[i]++;
   }
 }
-setInterval(drawMatrix, 35); // Velocidade da chuva
+setInterval(drawMatrix, 35); 
 
-// --- 2. LÓGICA ASSINATURA MOVIMENTO NOME (Parallax Imagem) ---
+// LÓGICA ASSINATURA
 
 document.addEventListener("mousemove", (e) => {
     const moveX = e.clientX * -0.015;
@@ -53,8 +52,6 @@ document.addEventListener("mousemove", (e) => {
     
 });
 
-
-// --- 3. LÓGICA ASSINATURA PERMANECER VISÍVEL ( ao entrar no elemetno) ---
 const signatureContainer = document.getElementById("signature-wrapper");
 
 if(signatureContainer) {
