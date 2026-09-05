@@ -17,14 +17,15 @@ O projeto é uma página web estática, responsiva e com navegação por seçõe
 
 ## Tecnologias utilizadas
 
-- HTML5;
-- CSS3;
-- JavaScript;
-- Bootstrap 5;
-- Bootstrap Icons;
-- Font Awesome;
-- Google Fonts;
-- Canvas API.
+
+![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
+![CSS](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
+![Bootstrap](https://img.shields.io/badge/Bootstrap-7952B3?style=for-the-badge&logo=bootstrap&logoColor=white)
+![Font Awesome](https://img.shields.io/badge/Font%20Awesome-528DD7?style=for-the-badge&logo=fontawesome&logoColor=white)
+![Google Fonts](https://img.shields.io/badge/Google%20Fonts-4285F4?style=for-the-badge&logo=googlefonts&logoColor=white)
+![CanvasAPI](https://img.shields.io/badge/Canvas%20API-00C4CC?style=for-the-badge&logo=canva&logoColor=white)
+
 
 ## Estrutura do projeto
 
