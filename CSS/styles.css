@@ -1,0 +1,577 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+@font-face {
+    font-family: 'Amsterdam-Four'; 
+    src: url('../assets/fonts/amsterdam-four.ttf') format('truetype'); 
+}
+
+/* Paleta de Cores */
+:root {
+  --ciano-escuro: #010f10;
+  --ln-dark-green: #081c15;
+  --teal-color: #20c997;
+  --ciano-color: #108080;
+  --white-color: #f1f1f1;
+  --off-white: #fffaeb;
+  --gray-color: #adadad;
+}
+
+/* estilização geral */
+
+body {
+  background-color: var(--ciano-escuro);
+  color: var(--white-color);
+  font-family: 'Montserrat', sans-serif;
+  
+  overflow-x: hidden;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-family: 'Anton', sans-serif;
+  color: var(--off-white);
+  
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+h5 {
+color: var(--off-white);
+}
+
+p {
+  color: var(--gray-color);
+}
+
+span {
+  color: var(--teal-color);
+}
+
+
+
+/* --- Scrollbar Personalizada --- */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--ln-dark-green);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--teal-color);
+  border-radius: 4px;
+}
+
+/* --- Navbar Glassmorphism --- */
+.navbar {
+  background-color: var(--ciano-escuro);
+  backdrop-filter: blur(10px);
+  /* border-bottom: 1px solid rgba(32, 201, 151, 0.3); */
+  padding: 1rem 0;
+  position: fixed;
+  width: 100%;
+  z-index: 1000;
+  top: 0;
+}
+
+.navbar .navbar-toggler {
+  border-color: var(--ciano-color);
+}
+
+.navbar .navbar-toggler i {
+  color: var(--ciano-color);
+}
+
+
+.nav-link {
+  color: var(--white-color) !important;
+  font-weight: 700;
+  margin: 0 15px;
+  position: relative;
+  transition: 0.3s;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+}
+
+.nav-link:hover {
+  color: var(--teal-color) !important;
+}
+
+.nav-link::after {
+  content: '';
+  display: block;
+  width: 0;
+  height: 3px;
+  background: var(--teal-color);
+  transition: width 0.3s ease;
+  transform: skewX(-20deg);
+}
+
+
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
+/* --- HERO SECTION (Matrix & Glitch) --- */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  background: #000;
+  padding-top: 80px;
+}
+
+/* Canvas do Matrix fica no fundo */
+#matrixCanvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  opacity: 0.25;
+  /* Transparência para não atrapalhar a leitura */
+}
+
+.hero-content {
+  z-index: 2;
+  text-align: center;
+  position: relative;
+}
+
+/* Container da Foto */
+.logo-container {
+  position: relative;
+  width: 280px;
+  height: 280px;
+  margin: 0 auto 30px;
+  border-radius: 12%;
+  overflow: hidden;
+}
+
+/* Foto com Animação de Entrada (Decode) */
+.logo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 15%;
+  border: 4px solid var(--teal-color);
+  box-shadow: 0 0 40px rgba(32, 201, 151, 0.3);
+
+
+  animation: decode-image 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+/* Keyframes do efeito Glitch/Decode */
+@keyframes decode-image {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+    filter: blur(20px) grayscale(100%);
+    clip-path: inset(40% 0 40% 0);
+  }
+
+  30% {
+    opacity: 1;
+    clip-path: inset(10% 0 20% 0);
+    transform: translate(-5px, 0) scale(0.9);
+    filter: blur(5px) hue-rotate(90deg);
+  }
+
+  60% {
+    transform: translate(5px, 0) scale(1.02);
+    clip-path: inset(0 0 0 0);
+    filter: none;
+  }
+
+  100% {
+    transform: scale(1);
+    clip-path: inset(0 0 0 0);
+    filter: none;
+  }
+}
+
+/* Efeito Scanline sobre a foto */
+.profile-container::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(transparent 50%, rgba(32, 201, 151, 0.1) 50%);
+  background-size: 100% 4px;
+  pointer-events: none;
+}
+
+/* --- ASSINATURA INTERATIVA (Efeito Wipe) --- */
+#signature-wrapper {
+  width: 100%;
+  max-width: 600px;
+  height: 250px;
+  margin: 20px auto;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: crosshair;
+}
+
+.signature-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+
+  clip-path: inset(0 100% 0 0);
+  -webkit-clip-path: inset(0 100% 0 0);
+  opacity: 0.4;
+  transition: all 1.5s ease-out;
+
+}
+
+
+/* Texto piscante "Passe o Mouse" */
+.hint {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.7rem;
+  color: var(--teal-color);
+  animation: pulse 1.5s infinite;
+  pointer-events: none;
+  letter-spacing: 2px;
+}
+
+.revelado .hint {
+  transition: opacity 35s ease-in-out;
+  opacity: 0;
+  visibility: hidden;
+  animation: none;
+}
+
+@keyframes pulse {
+
+  0%,
+  100% {
+    opacity: 0.3;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+/* Ao passar o mouse: Revela a assinatura */
+.revelado .signature-img {
+  clip-path: inset(0 0 0 0);
+  -webkit-clip-path: inset(0 0 0 0);
+  opacity: 1;
+  filter: drop-shadow(0 0 5px var(--teal-color));
+}
+
+/* ABOUT SECTION */
+
+/* --- SEÇÃO SOBRE MIM (Creative Profile) --- */
+.about-section {
+  padding: 100px 0;
+  background: linear-gradient(to bottom, #000000, var(--ciano-escuro));
+  position: relative;
+  overflow: hidden;
+}
+
+/* Wrapper da Imagem */
+.about-img-wrapper {
+  position: relative;
+  height: 450px;
+  /* Altura fixa necessária para os cálculos */
+  /* display: flex;  <--- REMOVIDO (não usaremos mais flex para alinhar) */
+  /* align-items: flex-end; <--- REMOVIDO */
+  /* justify-content: center; <--- REMOVIDO */
+}
+
+/* Círculo Neon atrás da foto (Mantido centralizado) */
+.glow-circle {
+  position: absolute;
+  width: 350px;
+  height: 350px;
+  background: radial-gradient(circle, rgba(32, 201, 151, 0.2) 0%, transparent 70%);
+  border: 2px solid rgba(32, 201, 151, 0.3);
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  animation: pulse-glow 4s infinite alternate;
+}
+
+/* Foto Recortada (Agora posicionada absolutamente) */
+.about-img-cutout {
+  position: absolute;
+
+  bottom: 0px;
+
+  border-radius: 46%;
+
+  left: 50%;
+  transform: translateX(-50%);
+  /* Centraliza horizontalmente */
+
+  z-index: 2;
+  max-height: 120%;
+  /* Aumentei para garantir que a cabeça saia bem no topo */
+  width: auto;
+  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.5));
+  transition: transform 0.3s ease;
+  mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
+}
+
+/* Ajuste no Hover (É preciso combinar os transforms) */
+.about-img-wrapper:hover .about-img-cutout {
+  /* Mantém o translateX(-50%) e adiciona a escala e o movimento Y */
+  transform: translateX(-50%) scale(1.03) translateY(-10px);
+  /* <--- ALTERADO */
+}
+
+/* Resto das animações e estilos */
+@keyframes pulse-glow {
+  0% {
+    box-shadow: 0 0 20px rgba(32, 201, 151, 0.1);
+    transform: translate(-50%, -50%) scale(1);
+  }
+
+  100% {
+    box-shadow: 0 0 50px rgba(32, 201, 151, 0.3);
+    transform: translate(-50%, -50%) scale(1.05);
+  }
+}
+
+.code-box-decoration {
+  position: absolute;
+  top: 70%;
+  right: 0%;
+  background: rgba(11, 12, 16, 0.9);
+  border: 1px solid var(--teal-color);
+  padding: 5px 15px;
+  border-radius: 4px;
+  z-index: 3;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  font-family: monospace;
+  color: var(--teal-color);
+  font-size: 0.8rem;
+  animation: float-y 3s ease-in-out infinite;
+}
+
+
+
+
+@keyframes float-y {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.about-text-box {
+  border-left: 3px solid var(--teal-color);
+  padding-left: 30px;
+}
+
+.about-text-box a.btn {
+  background:transparent;
+  border: 1px solid var(--teal-color);
+  color: var(--gray-color);
+  text-transform: uppercase;
+  font-weight: 700;
+  
+}
+
+.about-text-box a.btn:hover {
+  background: var(--teal-color);
+  color: #000;
+  box-shadow: 0 0 15px var(--teal-color);
+}
+
+
+/* Ajuste para mobile (Recalculando o bottom) */
+@media (max-width: 991px) {
+  .about-img-wrapper {
+    height: 350px;
+    margin-bottom: 40px;
+  }
+
+  .glow-circle {
+    width: 280px;
+    height: 280px;
+  }
+
+  /* Novo cálculo mobile: (350 - 280) / 2 = 35px */
+  .about-img-cutout {
+    bottom: 35px;
+    max-height: 125%;
+  }
+
+  /* <--- ALTERADO */
+
+  .about-text-box {
+    border-left: none;
+    padding-left: 0;
+    border-top: 3px solid var(--teal-color);
+    padding-top: 20px;
+  }
+}
+
+/* --- TECH STRIP (Faixa Inclinada) --- */
+.tech-strip {
+  background: var(--ln-gray);
+  padding: 40px 0;
+  border-top: 3px solid var(--teal-color);
+  border-bottom: 3px solid var(--teal-color);
+  transform: skewY(-2deg);
+  
+  margin: 60px 0;
+}
+
+.tech-content {
+  transform: skewY(2deg);
+  /* Corrige a inclinação para o conteúdo */
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 35px;
+}
+
+.tech-item {
+  font-size: 2.2rem;
+  color: var(--gray-color);
+  transition: 0.2s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.tech-item span {
+  font-size: 0.7rem;
+  margin-top: 8px;
+  font-family: 'Montserrat';
+  opacity: 0;
+  transition: 0.2s;
+}
+
+.tech-item:hover {
+  color: var(--teal-color);
+  transform: translateY(-5px);
+}
+
+.tech-item:hover span {
+  opacity: 1;
+}
+
+/* --- PROJETOS (Cards Modernos) --- */
+.project-card {
+  background: #121212;
+  border: 1px solid #333;
+  height: 100%;
+  padding: 25px;
+  transition: 0.4s;
+  position: relative;
+  overflow: hidden;
+}
+
+.project-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 0;
+  background: var(--teal-color);
+  transition: 0.4s;
+}
+
+.project-card:hover {
+  transform: translateY(-8px);
+  border-color: var(--teal-color);
+}
+
+.project-card:hover::before {
+  height: 100%;
+}
+
+.btn-live {
+  background: transparent;
+  border: 1px solid var(--ln-white);
+  color: var(--ln-white);
+  border-radius: 0;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  padding: 8px 20px;
+  transition: 0.3s;
+}
+
+.btn-live:hover {
+  background: var(--teal-color);
+  border-color: var(--teal-color);
+  color: #000;
+}
+
+/* --- SKILLS (Barras) --- */
+.skill-bar-container {
+  background: #2a2a2a;
+  height: 6px;
+  width: 100%;
+  margin-top: 10px;
+  transform: skewX(-20deg);
+}
+
+.skill-bar-fill {
+  height: 100%;
+  background: var(--teal-color);
+  width: 0;
+  box-shadow: 0 0 10px var(--teal-color);
+}
+
+#skills span {
+  color: var(--off-white);
+}
+
+/* --- FOOTER --- */
+footer {
+  background: #000;
+  padding: 60px 0 30px;
+  border-top: 4px solid var(--teal-color);
+}
+
+.footer-logo {
+  width: 70px;
+  margin-bottom: 20px;
+}
+
+.social-icon {
+  color: #fff;
+  font-size: 1.8rem;
+  transition: 0.3s;
+}
+
+.social-icon:hover {
+  color: var(--teal-color);
+  transform: scale(1.1);
+}
