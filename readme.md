@@ -44,10 +44,12 @@ Portifolio/
 
 ### Abrir diretamente no navegador
 
-1. Clone ou baixe este repositório.
-2. Abra o arquivo `index.html` em um navegador moderno.
+Clique no link: [Portifolio](https://www.linkedin.com/in/pabloperdigao/) para visualizar o portfólio diretamente no navegador.
 
 ### Usar um servidor local
+
+1. Clone ou baixe este repositório.
+2. Abra o arquivo `index.html` em um navegador moderno.
 
 Com o VS Code, instale a extensão **Live Server**, abra o projeto e selecione **Open with Live Server** no arquivo `index.html`.
 
